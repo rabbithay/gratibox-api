@@ -16,7 +16,7 @@
 
 #### Response
 
-    in case of invalid data: status 406
+    in case of invalid params: status 406
 
     in case of repeated e-mail: status 409
 
@@ -35,7 +35,7 @@
 
 #### Response
 
-    in case of invalid data: status 406
+    in case of invalid params: status 406
 
     in case of incorrect e-mail and/or password: 401
 
@@ -86,7 +86,7 @@
 
 #### Response
 
-    in case of invalid data: status 406
+    in case of invalid params: status 406
 
     in case of invalid token: status 401
 
