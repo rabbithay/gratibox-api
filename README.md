@@ -76,7 +76,7 @@
 
 <br>
 
-### `POST /sign-plan`
+### `POST /plan`
 
 #### Request
 
@@ -86,7 +86,7 @@
         "user_id": 1,
         "plan_type": "weekly",
         "delivery_day": 1,
-        "products": [],
+        "products": [1, 2, 3],
         "full_user_name": "Marina Sena",
         "address": "",
         "cep": "",
@@ -96,9 +96,9 @@
 
 #### Response
 
-    in case of invalid params: status 406
-
     in case of invalid token: status 401
+
+    in case of invalid params: status 406
 
     in case of success: status 201
 

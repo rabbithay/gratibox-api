@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import 'jest';
 import supertest from 'supertest';
-import dayjs from 'dayjs';
 import bcrypt from 'bcrypt';
 import app from '../src/app';
 import connection from '../src/database/database';
@@ -10,8 +9,6 @@ import connection from '../src/database/database';
 beforeEach(async () => {
   await connection.query('DELETE FROM users;');
   await connection.query('DELETE FROM sessions;');
-  await connection.query('DELETE FROM users;');
-  await connection.query('DELETE FROM users;');
 });
 
 describe('POST /login', () => {
