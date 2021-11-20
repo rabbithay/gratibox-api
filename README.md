@@ -16,7 +16,7 @@
 
 #### Response
 
-    in case of invalid data: status 406
+    in case of invalid params: status 406
 
     in case of repeated e-mail: status 409
 
@@ -35,38 +35,48 @@
 
 #### Response
 
-    in case of invalid data: status 406
+    in case of invalid params: status 406
 
     in case of incorrect e-mail and/or password: 401
 
     in case of success: status 200
 
-    data: {
-        "user_id": 1,
-        "name": "Marina",
-        "email": "marinasena@gmail.com",
-        "token": "ad52a74s3f54a32d",
-        "plan_status": true,
-        "PLAN": {
-            "plan_type": "weekly",
-            "created_date": ,
-            "next_deliveries": [
-                delivery_date,
-                delivery_date,
-                delivery_date,
-                delivery_date
-            ],
-            products: [
-                "incensos", 
-                "produtos organicos",
-                "chás"
-            ]
+    if user has a plan:
+        data: {
+            "user_id": 1,
+            "name": "Marina",
+            "email": "marinasena@gmail.com",
+            "token": "ad52a74s3f54a32d",
+            "plan_status": true,
+            "PLAN": {
+                "plan_type": "weekly",
+                "created_date": ,
+                "next_deliveries": [
+                    delivery_date,
+                    delivery_date,
+                    delivery_date,
+                    delivery_date
+                ],
+                "products": [
+                    "incensos", 
+                    "produtos organicos",
+                    "chás"
+                ]
+            }
         }
-    }
+
+    if user does not has' a plan:
+        data: {
+            "user_id": 1,
+            "name": "Marina",
+            "email": "marinasena@gmail.com",
+            "token": "ad52a74s3f54a32d",
+            "plan_status": false,        
+        }
 
 <br>
 
-### `POST /sign-plan`
+### `POST /plan`
 
 #### Request
 
@@ -76,7 +86,7 @@
         "user_id": 1,
         "plan_type": "weekly",
         "delivery_day": 1,
-        "products": [],
+        "products": [1, 2, 3],
         "full_user_name": "Marina Sena",
         "address": "",
         "cep": "",
@@ -86,9 +96,9 @@
 
 #### Response
 
-    in case of invalid data: status 406
-
     in case of invalid token: status 401
+
+    in case of invalid params: status 406
 
     in case of success: status 201
 

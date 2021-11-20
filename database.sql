@@ -10,8 +10,6 @@ CREATE TABLE "users" (
 	"city" TEXT,
 	"state" TEXT,
 	CONSTRAINT "users_pk" PRIMARY KEY ("user_id")
-) WITH (
-  OIDS=FALSE
 );
 
 CREATE TABLE "sessions" (
@@ -19,8 +17,6 @@ CREATE TABLE "sessions" (
 	"user_id" integer NOT NULL,
 	"token" TEXT NOT NULL,
 	CONSTRAINT "sessions_pk" PRIMARY KEY ("session_id")
-) WITH (
-  OIDS=FALSE
 );
 
 CREATE TABLE "plans" (
@@ -29,8 +25,6 @@ CREATE TABLE "plans" (
 	"delivery_day" integer NOT NULL,
 	"created_date" timestamp with time zone NOT NULL DEFAULT 'now()',
 	CONSTRAINT "plans_pk" PRIMARY KEY ("plan_id")
-) WITH (
-  OIDS=FALSE
 );
 
 CREATE TABLE "deliveries" (
@@ -38,16 +32,12 @@ CREATE TABLE "deliveries" (
 	"user_id" integer NOT NULL,
 	"delivery_date" timestamp with time zone NOT NULL,
 	CONSTRAINT "deliveries_pk" PRIMARY KEY ("delivery_id")
-) WITH (
-  OIDS=FALSE
 );
 
 CREATE TABLE "products" (
 	"product_id" integer NOT NULL,
 	"product_name" TEXT NOT NULL,
 	CONSTRAINT "products_pk" PRIMARY KEY ("product_id")
-) WITH (
-  OIDS=FALSE
 );
 
 CREATE TABLE "product_user" (
@@ -55,8 +45,6 @@ CREATE TABLE "product_user" (
 	"user_id" integer NOT NULL,
 	"product_id" integer NOT NULL,
 	CONSTRAINT "product_user_pk" PRIMARY KEY ("product_user_id")
-) WITH (
-  OIDS=FALSE
 );
 
 ALTER TABLE "users" ADD CONSTRAINT "users_fk0" FOREIGN KEY ("plan_id") REFERENCES "plans"("plan_id");
