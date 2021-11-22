@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 
 import * as usersControllers from './controllers/user';
+import * as planControllers from './controllers/plan';
 
 const app = express();
 app.use(cors());
@@ -11,6 +12,8 @@ app.use(express.json());
 app.post('/register', usersControllers.register);
 
 app.post('/login', usersControllers.login);
+
+app.post('/plan', planControllers.signPlan);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 

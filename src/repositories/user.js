@@ -11,8 +11,6 @@ export async function searchUserByEmail(email) {
 }
 
 export async function insertUser(userInfo) {
-  console.log({ userInfo });
-
   const {
     name, email, password,
   } = userInfo;

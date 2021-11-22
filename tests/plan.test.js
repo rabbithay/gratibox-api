@@ -8,26 +8,29 @@ import app from '../src/app';
 import connection from '../src/database/database';
 
 beforeEach(async () => {
-  await connection.query('DELETE FROM users;');
+  await connection.query('DELETE FROM product_user;');
+  await connection.query('DELETE FROM products;');
   await connection.query('DELETE FROM sessions;');
+  await connection.query('DELETE FROM users;');
   await connection.query('DELETE FROM plans;');
 });
 
 describe('POST /plan', () => {
   it('should return status 401 in case of invalid token', async () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
-    const userId = await connection.query(`
+    let userId = await connection.query(`
       INSERT INTO users
-      (user_name, email, password)
-      VALUES ('Marina', 'marinasena@gmail.com', $1)
+      (user_name, email, password, plan_status)
+      VALUES ('Marina', 'marinasena@gmail.com', $1, false)
       RETURNING user_id
     `, [hashedPass]);
+    userId = userId.rows[0].user_id;
 
     const token = uuid();
     await connection.query(`
       INSERT INTO sessions
       (user_id, token)
-      VALUES (${userId}, ${token})
+      VALUES (${userId}, '${token}')
     `);
 
     const body = {
@@ -48,12 +51,13 @@ describe('POST /plan', () => {
 
   it('should return status 406 in case of invalid params', async () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
-    const userId = await connection.query(`
+    let userId = await connection.query(`
       INSERT INTO users
-      (user_name, email, password)
-      VALUES ('Marina', 'marinasena@gmail.com', ${hashedPass})
+      (user_name, email, password, plan_status)
+      VALUES ('Marina', 'marinasena@gmail.com', $1, false)
       RETURNING user_id
-    `);
+    `, [hashedPass]);
+    userId = userId.rows[0].user_id;
 
     const token = uuid();
     await connection.query(`
@@ -80,12 +84,13 @@ describe('POST /plan', () => {
 
   it('should return status 201 in case of success', async () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
-    const userId = await connection.query(`
+    let userId = await connection.query(`
       INSERT INTO users
-      (user_name, email, password)
-      VALUES ('Marina', 'marinasena@gmail.com', ${hashedPass})
+      (user_name, email, password, plan_status)
+      VALUES ('Marina', 'marinasena@gmail.com', $1, false)
       RETURNING user_id
-    `);
+    `, [hashedPass]);
+    userId = userId.rows[0].user_id;
 
     const token = uuid();
     await connection.query(`
