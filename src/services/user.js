@@ -21,3 +21,8 @@ export async function checkEmailIsRepeated(email) {
 export async function createNewUser(userInfo) {
   await userRepository.insertUser(userInfo);
 }
+
+export function checkLoginInfo(user) {
+  const invalidUserInfo = schemas.validateLoginInfo(user);
+  return !!invalidUserInfo;
+}

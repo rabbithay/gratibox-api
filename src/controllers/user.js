@@ -2,7 +2,6 @@
 import joi from 'joi';
 import * as userService from '../services/user';
 
-// eslint-disable-next-line import/prefer-default-export
 export async function register(req, res) {
   const userInfo = req.body;
 
@@ -14,4 +13,11 @@ export async function register(req, res) {
 
   await userService.createNewUser(userInfo);
   return res.sendStatus(201);
+}
+
+export async function login(req, res) {
+  const loginInfo = req.body;
+
+  const userInfoIsInvalid = userService.checkLoginInfo(loginInfo);
+  if (userInfoIsInvalid) return res.sendStatus(406);
 }
