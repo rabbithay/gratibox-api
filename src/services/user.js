@@ -42,7 +42,7 @@ export async function login(loginInfo) {
 
   const passwordMatch = checkPasswordMatch(loginInfo.password, userInfo[0].password);
   if (!passwordMatch) return false;
-  console.log({ userInfo });
+
   const token = generateToken();
   const body = { user_id: userInfo[0].user_id, token };
   await userRepository.createSession(body);

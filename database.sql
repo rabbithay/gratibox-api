@@ -36,7 +36,7 @@ CREATE TABLE "deliveries" (
 );
 
 CREATE TABLE "products" (
-	"product_id" integer NOT NULL,
+	"product_id" serial NOT NULL,
 	"product_name" TEXT NOT NULL,
 	CONSTRAINT "products_pk" PRIMARY KEY ("product_id")
 );

@@ -11,8 +11,6 @@ export async function searchUserByEmail(email) {
 }
 
 export async function insertUser(userInfo) {
-  console.log({ userInfo });
-
   const {
     name, email, password,
   } = userInfo;
@@ -23,20 +21,21 @@ export async function insertUser(userInfo) {
   `, [name, email, password]);
 }
 
-export async function updateUser({ userInfo }) {
+export async function updateUser(userInfo) {
   const {
-    fullName, address, cep, city, state, planId, userId,
+    full_user_name, address, cep, city, state, planId, user_id,
   } = userInfo;
+  console.log({ userInfo });
   await connection.query(`
     UPDATE users
-    SET user_full_name = $1,
+    SET full_user_name = $1,
     address = $2,
     cep = $3,
     city = $4,
-    state = $5
+    state = $5,
     plan_id = $6
-    WHERE user_id = ${userId}
-  `, [fullName, address, cep, city, state, planId]);
+    WHERE user_id = ${user_id}
+  `, [full_user_name, address, cep, city, state, planId]);
 }
 
 export async function createSession(userInfo) {
