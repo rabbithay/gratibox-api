@@ -3,6 +3,7 @@ import * as planRepository from '../repositories/plan';
 import * as productRepository from '../repositories/product';
 import validateBearerToken from '../schemas/authSchema';
 import validateNewPlanInfo from '../schemas/planSchema';
+import * as userRepository from '../repositories/user';
 
 export function checkAuth(bearerToken) {
   if (bearerToken === undefined) return true;
@@ -16,6 +17,7 @@ export function checkPlanInfo(body) {
 }
 
 export async function signPlan(planInfo) {
-  await planRepository.createPlan(planInfo);
+  const planId = await planRepository.createPlan(planInfo);
   await productRepository.addUserProducts(planInfo);
+  await userRepository.updateUser({ ...planInfo, planId });
 }
