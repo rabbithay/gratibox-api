@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import 'jest';
+import '../src/setup';
 import supertest from 'supertest';
 import bcrypt from 'bcrypt';
 import app from '../src/app';
 import connection from '../src/database/database';
 
 beforeEach(async () => {
-  await connection.query('DELETE FROM users;');
   await connection.query('DELETE FROM sessions;');
+  await connection.query('DELETE FROM users;');
 });
 
 describe('POST /login', () => {
@@ -24,7 +24,7 @@ describe('POST /login', () => {
   it('should return status 401 in case of email not registered', async () => {
     const body = {
       email: 'marinasena@gmail.com',
-      password: 'De1primeira!',
+      password: 'De1primira!',
     };
     const result = await supertest(app).post('/login').send(body);
     expect(result.status).toEqual(401);
@@ -34,8 +34,8 @@ describe('POST /login', () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
     await connection.query(`
       INSERT INTO users
-      (name, email, password)
-      VALUES ('Marina', 'marinasena@gmail.com', $1)
+      (user_name, email, password, plan_status)
+      VALUES ('Marina', 'marinasena@gmail.com', $1, false)
     `, [hashedPass]);
     const body = {
       email: 'marinasena@gmail.com',
@@ -49,8 +49,8 @@ describe('POST /login', () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
     await connection.query(`
       INSERT INTO users
-      (name, email, password)
-      VALUES ('Marina', 'marinasena@gmail.com', $1)
+      (user_name, email, password, plan_status)
+      VALUES ('Marina', 'marinasena@gmail.com', $1, false)
     `, [hashedPass]);
     const body = {
       email: 'marinasena@gmail.com',

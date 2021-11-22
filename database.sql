@@ -1,10 +1,11 @@
 CREATE TABLE "users" (
-	"user_id" integer NOT NULL,
+	"user_id" serial NOT NULL,
+	"user_name" TEXT NOT NULL,
 	"email" TEXT NOT NULL UNIQUE,
 	"password" TEXT NOT NULL,
 	"plan_status" BOOLEAN NOT NULL,
 	"plan_id" integer,
-	"user_name" TEXT,
+	"full_user_name" TEXT,
 	"address" TEXT,
 	"cep" TEXT,
 	"city" TEXT,
