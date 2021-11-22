@@ -4,6 +4,11 @@ import { v4 as uuid } from 'uuid';
 import * as userRepository from '../repositories/user';
 import * as schemas from '../schemas/userSchema';
 
+function hashPassword(password) {
+  const hashedPass = bcrypt.hashSync(password, 13);
+  return hashedPass;
+}
+
 export function checkRegisterInfo(user) {
   const invalidUserInfo = schemas.validalidateNewUserInfo(user);
   return !!invalidUserInfo;
@@ -19,7 +24,8 @@ export async function checkEmailIsRepeated(email) {
 }
 
 export async function createNewUser(userInfo) {
-  await userRepository.insertUser(userInfo);
+  const hashedPass = hashPassword(userInfo.password);
+  await userRepository.insertUser({ ...userInfo, hashedPass });
 }
 
 export function checkLoginInfo(user) {
