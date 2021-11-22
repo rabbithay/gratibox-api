@@ -63,7 +63,7 @@ describe('POST /plan', () => {
     await connection.query(`
       INSERT INTO sessions
       (user_id, token)
-      VALUES (${userId}, ${token})
+      VALUES (${userId}, '${token}')
     `);
 
     const body = {
@@ -96,18 +96,18 @@ describe('POST /plan', () => {
     await connection.query(`
       INSERT INTO sessions
       (user_id, token)
-      VALUES (${userId}, ${token})
+      VALUES (${userId}, '${token}')
     `);
 
-    const productId = await connection.query(`
+    const response = await connection.query(`
       INSERT INTO products
       (product_name)
       VALUES ('incenso'), ('chás')
       RETURNING product_id
     `);
-
+    const productId = response.rows.flatMap((i) => i.product_id);
     const body = {
-      user_id: 1,
+      user_id: userId,
       plan_type: 'weekly',
       delivery_day: 1,
       products: productId,

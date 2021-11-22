@@ -98,7 +98,7 @@
 
     in case of invalid token: status 401
 
-    in case of invalid params: status 406
+    in case of invalid params: status 406 > trocar pra 400
 
     in case of success: status 201
 

@@ -6,8 +6,11 @@ import app from '../src/app';
 import connection from '../src/database/database';
 
 beforeEach(async () => {
+  await connection.query('DELETE FROM product_user;');
+  await connection.query('DELETE FROM products;');
   await connection.query('DELETE FROM sessions;');
   await connection.query('DELETE FROM users;');
+  await connection.query('DELETE FROM plans;');
 });
 
 describe('POST /register', () => {
