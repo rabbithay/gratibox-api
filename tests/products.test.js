@@ -42,16 +42,16 @@ describe('GET /products', () => {
     let userId = await connection.query(`
       INSERT INTO users
       (user_name, email, password, plan_status)
-      VALUES ('Marina', 'marinasena@gmail.com', $1, false)
+      VALUES ('Marina', 'marinasena@gmail.com', '${hashedPass}', false)
       RETURNING user_id
-    `, [hashedPass]);
+    `);
     userId = userId.rows[0].user_id;
 
     const token = uuid();
     await connection.query(`  
       INSERT INTO sessions
       (user_id, token)
-      VALUES (${userId[0]}, '${token}')
+      VALUES (${userId}, '${token}')
     `);
 
     const result = await supertest(app).get('/products').set('Authorization', `Bearer ${token}`);

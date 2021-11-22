@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-unused-vars */
 import connection from '../database/database';
 
 export async function searchUserByEmail(email) {
@@ -12,13 +11,13 @@ export async function searchUserByEmail(email) {
 
 export async function insertUser(userInfo) {
   const {
-    name, email, password,
+    name, email, hashedPass,
   } = userInfo;
   await connection.query(`
     INSERT INTO users
     (user_name, email, password, plan_status)
     VALUES ($1, $2, $3, false)
-  `, [name, email, password]);
+  `, [name, email, hashedPass]);
 }
 
 export async function updateUser(userInfo) {
