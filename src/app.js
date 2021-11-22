@@ -1,15 +1,18 @@
+import './setup';
 import express from 'express';
 import cors from 'cors';
 
-import * as exampleController from './controllers/example';
+import * as usersControllers from './controllers/user';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/route', exampleController.example1);
+app.post('/register', usersControllers.register);
 
-app.post('/route', exampleController.example2);
+app.post('/login', usersControllers.login);
+
+app.get('/health', (req, res) => res.sendStatus(200));
 
 // eslint-disable-next-line no-unused-vars
 app.use((error, request, response, next) => {

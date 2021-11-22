@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import 'jest';
+import '../src/setup';
 import supertest from 'supertest';
 import { v4 as uuid } from 'uuid';
+import bcrypt from 'bcrypt';
 import app from '../src/app';
 import connection from '../src/database/database';
 
@@ -17,7 +18,7 @@ describe('POST /plan', () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
     const userId = await connection.query(`
       INSERT INTO users
-      (name, email, password)
+      (user_name, email, password)
       VALUES ('Marina', 'marinasena@gmail.com', $1)
       RETURNING user_id
     `, [hashedPass]);
@@ -49,7 +50,7 @@ describe('POST /plan', () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
     const userId = await connection.query(`
       INSERT INTO users
-      (name, email, password)
+      (user_name, email, password)
       VALUES ('Marina', 'marinasena@gmail.com', ${hashedPass})
       RETURNING user_id
     `);
@@ -81,7 +82,7 @@ describe('POST /plan', () => {
     const hashedPass = bcrypt.hashSync('De1primeira!', 13);
     const userId = await connection.query(`
       INSERT INTO users
-      (name, email, password)
+      (user_name, email, password)
       VALUES ('Marina', 'marinasena@gmail.com', ${hashedPass})
       RETURNING user_id
     `);
