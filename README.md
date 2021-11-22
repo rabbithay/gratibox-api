@@ -49,7 +49,7 @@
             "token": "ad52a74s3f54a32d",
             "plan_status": true,
             "PLAN": {
-                "plan_type": "weekly",
+                "plan_type": "Semanal",
                 "created_date": ,
                 "next_deliveries": [
                     delivery_date,
@@ -84,7 +84,7 @@
 
     body: {
         "user_id": 1,
-        "plan_type": "weekly",
+        "plan_type": "Semanal",
         "delivery_day": 1,
         "products": [1, 2, 3],
         "full_user_name": "Marina Sena",

@@ -3,7 +3,7 @@ import Joi from 'joi';
 export default function validateNewPlanInfo(obj) {
   const schema = Joi.object({
     user_id: Joi.number().integer().positive(),
-    plan_type: Joi.string().valid('weekly', 'monthly'),
+    plan_type: Joi.string().valid('Semanal', 'Mensal'),
     delivery_day: Joi.number().integer().positive().valid(1, 2, 3),
     products: Joi.array().items(Joi.number().integer().positive()),
     full_user_name: Joi.string().required(),

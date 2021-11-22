@@ -108,7 +108,7 @@ describe('POST /plan', () => {
     const productId = response.rows.flatMap((i) => i.product_id);
     const body = {
       user_id: userId,
-      plan_type: 'weekly',
+      plan_type: 'Semanal',
       delivery_day: 1,
       products: productId,
       full_user_name: 'Marina Sena',
