@@ -20,4 +20,9 @@ export async function login(req, res) {
 
   const userInfoIsInvalid = userService.checkLoginInfo(loginInfo);
   if (userInfoIsInvalid) return res.sendStatus(406);
+
+  const userInfo = await userService.login(loginInfo);
+  if (!userInfo) return res.sendStatus(401);
+
+  return res.status(200).send(userInfo);
 }
