@@ -17,6 +17,9 @@ export async function addUserProducts(planInfo) {
   `);
 }
 
-export async function example2() {
-  //
+export async function listProducts() {
+  const list = await connection.query(`
+    SELECT * FROM products
+  `);
+  return list.rows;
 }

@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-unused-vars */
 import connection from '../database/database';
 
 export async function searchUserByEmail(email) {

@@ -2,18 +2,21 @@ import './setup';
 import express from 'express';
 import cors from 'cors';
 
-import * as usersControllers from './controllers/user';
+import * as userControllers from './controllers/user';
 import * as planControllers from './controllers/plan';
+import listProducts from './controllers/product';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post('/register', usersControllers.register);
+app.post('/register', userControllers.register);
 
-app.post('/login', usersControllers.login);
+app.post('/login', userControllers.login);
 
 app.post('/plan', planControllers.signPlan);
+
+app.get('/products', listProducts);
 
 app.get('/health', (req, res) => res.sendStatus(200));
 

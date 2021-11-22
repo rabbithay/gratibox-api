@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import connection from '../database/database';
 
-export async function createPlan(planInfo) {
+export default async function createPlan(planInfo) {
   const { plan_type, delivery_day } = planInfo;
 
   const planId = await connection.query(`
@@ -12,8 +12,4 @@ export async function createPlan(planInfo) {
   `, [plan_type, delivery_day]);
 
   return planId.rows[0].plan_id;
-}
-
-export async function example2() {
-  //
 }

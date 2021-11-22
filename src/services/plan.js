@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import * as planRepository from '../repositories/plan';
+import createPlan from '../repositories/plan';
 import * as productRepository from '../repositories/product';
 import validateBearerToken from '../schemas/authSchema';
 import validateNewPlanInfo from '../schemas/planSchema';
@@ -17,7 +16,7 @@ export function checkPlanInfo(body) {
 }
 
 export async function signPlan(planInfo) {
-  const planId = await planRepository.createPlan(planInfo);
+  const planId = await createPlan(planInfo);
   await productRepository.addUserProducts(planInfo);
   await userRepository.updateUser({ ...planInfo, planId });
 }
